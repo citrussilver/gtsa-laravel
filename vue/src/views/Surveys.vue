@@ -1,5 +1,5 @@
 <template>
-    <PageComponent title="Dashboard">
+    <PageComponent title="Surveys">
       Content goes here
     </PageComponent>
 </template>
@@ -8,7 +8,7 @@
 import PageComponent from '../components/PageComponent.vue'
 
 export default {
-    name: "Dashboard",
+    name: "Surveys",
     components: {
       PageComponent
     }

@@ -10,7 +10,8 @@
         </router-link>
       </p>
     </div>
-    <form class="mt-8 space-y-6" action="#" method="POST">
+    <form class="mt-8 space-y-6" @submit="login">
+      {{ errorMsg }}
       <input type="hidden" name="remember" value="true">
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
@@ -57,29 +58,30 @@
 </template>
 
 <script setup>
-import {LockClosedIcon} from '@heroicons/vue/solid'
+import { LockClosedIcon } from '@heroicons/vue/solid'
 import store from '../store'
-import {useRouter} from 'vue-router';
+import { useRouter } from 'vue-router';
+import { ref } from "vue"
 
 const router = useRouter();
 
 const user = {
   email: '',
-  password: ''
+  password: '',
+  remember: false
 }
 
 function login(ev) {
   ev.preventDefault();
-
-  store.dispatch('login', user)
+  
+  store
+    .dispatch('login', user)
     .then(() => {
       router.push({
-        name: 'Dashboard'
-      })
+        name: 'Dashboard',
+      });
     })
 }
-
-
 </script>
 
 <style>

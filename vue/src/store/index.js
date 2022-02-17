@@ -10,28 +10,32 @@ const store = createStore({
     },
     getters: {},
     actions: {
-        register({ commit }, user) {
-            /*return fetch(`http://localhost:8000/api/register`, {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    method: 'POST',
-                    body: JSON.stringify(user),
-                })
-                //.then(res => res.json())
-                //.then(data => console.log(data))
-                .then((res) => res.json())
-                .then((res) => {
-                    commit("SET_USER", res);
-                    return res;
-                });*/
+        async login({ commit }, user) {
+            try {
+                const { data } = await axiosClient.post('/login', user);
+                console.log(data);
+                commit('SET_USER', data);
+                return data;
+            } catch (error) {
+                console.error(error);
+            }
         },
+        async register({ commit }, user) {
+            try {
+                const { data } = await axiosClient.post('/register', user);
+                console.log(data);
+                commit('SET_USER', data);
+                return data;
+            } catch (err) {
+                console.error(err);
+            }
+        },
+        
     },
     mutations: {
         LOGOUT_USER: (state) => {
-            state.user.data = {}
             state.user.token = null;
+            state.user.data = {};
         },
         SET_USER: (state, userData) => {
             state.user.token = userData.token;

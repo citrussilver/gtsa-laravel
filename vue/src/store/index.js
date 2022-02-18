@@ -11,31 +11,27 @@ const store = createStore({
     getters: {},
     actions: {
         async login({ commit }, user) {
-            try {
-                const { data } = await axiosClient.post('/login', user);
-                console.log(data);
-                commit('SET_USER', data);
-                return data;
-            } catch (error) {
-                console.error(error);
-            }
+            const { data } = await axiosClient.post('/login', user);
+            console.log(data);
+            commit('SET_USER', data);
+            return data;
         },
         async register({ commit }, user) {
-            try {
-                const { data } = await axiosClient.post('/register', user);
-                console.log(data);
-                commit('SET_USER', data);
-                return data;
-            } catch (err) {
-                console.error(err);
-            }
+            const { data } = await axiosClient.post('/register', user);
+            commit('SET_USER', data);
+            return data;
         },
-        
+        async logout({ commit }) {
+            const response = await axiosClient.post('/logout');
+            commit('LOGOUT_USER');
+            return response;
+        }
     },
     mutations: {
         LOGOUT_USER: (state) => {
             state.user.token = null;
             state.user.data = {};
+            sessionStorage.removeItem('TOKEN');
         },
         SET_USER: (state, userData) => {
             state.user.token = userData.token;

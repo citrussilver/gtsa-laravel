@@ -210,10 +210,12 @@ export default {
     const router = useRouter();
 
     function logout() {
-      store.commit('LOGOUT_USER');
-      router.push({
-        name: 'Login'
-      })
+      store.dispatch('logout')
+        .then(() => {
+          router.push({
+            name: 'Login'
+          })
+        });
     }
    
     return {

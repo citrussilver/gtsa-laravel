@@ -1,6 +1,6 @@
 <template>
     <PageComponent title="Dashboard">
-      Content goes here
+      Dashboard Content
     </PageComponent>
 </template>
 

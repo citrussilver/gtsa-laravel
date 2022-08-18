@@ -4,8 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Models\CreditCardTransaction;
-
 return new class extends Migration
 {
     /**
@@ -15,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('credit_card_loans', function (Blueprint $table) {
-            $table->increments('cc_loan_id');
-            $table->integer('cc_transact_id');
+        Schema::create('credit_card_transactions', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            $table->foreign('cc_transact_id')
-                ->references('cc_transact_id')
-                ->on(CreditCardTransaction::class)
-                ->onDelete('cascade');
         });
     }
 
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_card_loans');
+        Schema::dropIfExists('credit_card_transactions');
     }
 };

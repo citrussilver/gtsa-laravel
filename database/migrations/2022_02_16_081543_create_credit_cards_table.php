@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('credit_cards', function (Blueprint $table) {
-            $table->id();
+            $table->increments('credit_card_id');
             $table->char('last_4_digits', 4);
             $table->string('cc_name', 45);
             $table->decimal('credit_limit', 8, 2);

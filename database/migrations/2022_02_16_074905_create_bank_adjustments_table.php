@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\SavingsAcctTransaction;
+
 return new class extends Migration
 {
     /**
@@ -14,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bank_adjustments', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('sa_transact_id');
             $table->tinyInteger('bank_id');
             $table->dateTime('date_time');
@@ -22,6 +24,10 @@ return new class extends Migration
             $table->tinyInteger('credit');
             $table->string('remarks', 1000);
             $table->timestamps();
+            $table->foreign('sa_transact_id')
+                ->references('sa_transact_id')
+                ->on(SavingsAcctTransaction::class)
+                ->onDelete('cascade');
         });
     }
 

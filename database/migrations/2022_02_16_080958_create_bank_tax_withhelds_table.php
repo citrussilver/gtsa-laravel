@@ -14,13 +14,17 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bank_tax_withhelds', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('sa_transact_id');
             $table->tinyInteger('bank_id');
             $table->dateTime('date_time');
             $table->decimal('amount', 19, 2);
             $table->string('bank_sys_msg', 500);
             $table->timestamps();
+            $table->foreign('sa_transact_id')
+                ->references('sa_transact_id')
+                ->on(SavingsAcctTransaction::class)
+                ->onDelete('cascade');
         });
     }
 

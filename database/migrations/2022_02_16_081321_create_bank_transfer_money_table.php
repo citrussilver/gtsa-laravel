@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bank_transfer_money', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('sa_transact_id');
             $table->tinyInteger('bank_id');
             $table->dateTime('date_time');
@@ -22,6 +22,10 @@ return new class extends Migration
             $table->decimal('amount', 19, 2);
             $table->string('remarks', 1000);
             $table->timestamps();
+            $table->foreign('sa_transact_id')
+                ->references('sa_transact_id')
+                ->on(SavingsAcctTransaction::class)
+                ->onDelete('cascade');
         });
     }
 

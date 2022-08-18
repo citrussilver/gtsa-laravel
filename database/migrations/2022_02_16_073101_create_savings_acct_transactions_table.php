@@ -16,8 +16,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('savings_acct_transactions', function (Blueprint $table) {
-            $table->id();
-            $table->foreignIdFor(Bank::class, 'bank_id');
+            $table->increments('sa_transact_id');
+            //$table->foreignIdFor(Bank::class, 'bank_id');
             // hopefully can be omitted if created_at column doesn't have problems
             $table->dateTime('date_time');
             $table->tinyInteger('bank_transact_type_id', 3);

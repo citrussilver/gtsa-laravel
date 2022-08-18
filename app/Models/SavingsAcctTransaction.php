@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class SavingsAcctTransaction extends Model
 {
     use HasFactory;
+
+    protected $table = 'savings_acct_transactions';
+
+    protected $primaryKey = 'sa_transact_id';
+
+    
 }
